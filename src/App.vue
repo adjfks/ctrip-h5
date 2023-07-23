@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
@@ -7,6 +8,11 @@
   </div>
 </template>
 
-<style scoped>
-
+<style scoped lang="less">
+@tColor: red;
+div {
+  h1 {
+    color: @tColor;
+  }
+}
 </style>
