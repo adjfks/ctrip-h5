@@ -1,18 +1,66 @@
-# Vue 3 + TypeScript + Vite
+# ctrip-h5
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 项目开发文档
 
-## Recommended IDE Setup
+### 项目初始化
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+#### 1. 创建项目
 
-## Type Support For `.vue` Imports in TS
+执行`pnpm create vite`，选择`vue + ts`的组合创建项目。
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+#### 2. 添加less支持和normalize.less
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+vite内置了对less的支持，只需要运行`pnpm add -D less`安装依赖。
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+normalize.less用于统一各浏览器默认样式。
+
+#### 3. 添加路径别名
+
+在vite.config.ts中配置resolve.alias,因为要使用node的path模块，所以需要安装对应的ts类型包`@types/node`，属于开发依赖。
+
+#### 4. 配置路由
+
+执行`pnpm add vue-router`,使用`createWebHistory`创建HTML5模式的路由。
+
+#### 5. 引入UI库NutUI并配置自动按需引入
+
+执行`pnpm add @nutui/nutui`安装。
+
+配置自动按需引入，安装`pnpm add unplugin-vue-components -D`,在vite中进行配置
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import Components from 'unplugin-vue-components/vite'
+import NutUIResolver from '@nutui/nutui/dist/resolver'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    // 开启 unplugin 插件，自动引入 NutUI 组件
+    Components({
+      resolvers: [NutUIResolver()],
+    }),
+  ],
+  // 配置全局样式变量
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@nutui/nutui/dist/styles/variables.scss";`
+      }
+    }
+  }
+})
+```
+
+添加 NutUI vscode 扩展 nutui-vscode-extension
+
+#### 6. px 转 vw
+
+[postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport/blob/master/README_CN.md)
+
+执行`pnpm add -D postcss-px-to-viewport`安装
+
+在vite中配置该插件，注意只能使用数组形式配置`postcss.plugins`

@@ -1,12 +1,15 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
-  <div>
-    <h1>Hello</h1>
+  <div class="app">
+    <router-view></router-view>
   </div>
 </template>
 
-<style scoped>
-
+<style scoped lang="scss">
+body {
+  height: 100vh;
+}
 </style>
