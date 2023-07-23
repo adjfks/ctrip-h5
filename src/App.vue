@@ -8,11 +8,8 @@
   </div>
 </template>
 
-<style scoped lang="less">
-@tColor: red;
-div {
-  h1 {
-    color: @tColor;
-  }
+<style scoped lang="scss">
+body {
+  height: 100vh;
 }
 </style>

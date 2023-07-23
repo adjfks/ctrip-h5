@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@/styles/normalize.less'
+import '@/styles/normalize.scss'
 import router from '@/router'
 
 const app = createApp(App)
