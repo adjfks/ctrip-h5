@@ -4,25 +4,25 @@
 
 ### 项目初始化
 
-1. 创建项目
+#### 1. 创建项目
 
 执行`pnpm create vite`，选择`vue + ts`的组合创建项目。
 
-2. 添加less支持和normalize.less
+#### 2. 添加less支持和normalize.less
 
 vite内置了对less的支持，只需要运行`pnpm add -D less`安装依赖。
 
 normalize.less用于统一各浏览器默认样式。
 
-3. 添加路径别名
+#### 3. 添加路径别名
 
 在vite.config.ts中配置resolve.alias,因为要使用node的path模块，所以需要安装对应的ts类型包`@types/node`，属于开发依赖。
 
-4. 配置路由
+#### 4. 配置路由
 
 执行`pnpm add vue-router`,使用`createWebHistory`创建HTML5模式的路由。
 
-5. 引入UI库NutUI并配置自动按需引入
+#### 5. 引入UI库NutUI并配置自动按需引入
 
 执行`pnpm add @nutui/nutui`安装。
 
@@ -56,3 +56,11 @@ export default defineConfig({
 ```
 
 添加 NutUI vscode 扩展 nutui-vscode-extension
+
+#### 6. px 转 vw
+
+[postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport/blob/master/README_CN.md)
+
+执行`pnpm add -D postcss-px-to-viewport`安装
+
+在vite中配置该插件，注意只能使用数组形式配置`postcss.plugins`
