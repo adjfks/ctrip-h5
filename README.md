@@ -17,3 +17,7 @@ normalize.less用于统一各浏览器默认样式。
 3. 添加路径别名
 
 在vite.config.ts中配置resolve.alias,因为要使用node的path模块，所以需要安装对应的ts类型包`@types/node`，属于开发依赖。
+
+4. 配置路由
+
+执行`pnpm add vue-router`,使用`createWebHistory`创建HTML5模式的路由。
